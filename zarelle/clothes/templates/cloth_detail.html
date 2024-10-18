@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  ⚡ {{ cloth_detail.title }}
+{% endblock %}
+
+{% block content %}
+  <div class="flex justify-center items-center min-h-screen pt-8 pb-36">
+    <div class="flex flex-wrap justify-center items-start lg:gap-20 gap-8">
+      {% comment %}carousel{% endcomment %}
+      <div class="carousel w-[min(350px,95%)]">
+        <div id="slide1" class="carousel-item relative w-full">
+          <img src="{{ cloth_detail.image1 }}" draggable="false" class="w-full" />
+          <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <a href="#slide3" class="btn btn-circle">❮</a>
+            <a href="#slide2" class="btn btn-circle">❯</a>
+          </div>
+        </div>
+        <div id="slide2" class="carousel-item relative w-full">
+          <img src="{{ cloth_detail.image2 }}" draggable="false" class="w-full" />
+          <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <a href="#slide1" class="btn btn-circle">❮</a>
+            <a href="#slide3" class="btn btn-circle">❯</a>
+          </div>
+        </div>
+        <div id="slide3" class="carousel-item relative w-full">
+          <img src="{{ cloth_detail.image3 }}" draggable="false" class="w-full" />
+          <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <a href="#slide2" class="btn btn-circle">❮</a>
+            <a href="#slide1" class="btn btn-circle">❯</a>
+          </div>
+        </div>
+      </div>
+      {% comment %}carousel end{% endcomment %}
+      <div class="w-[min(350px,95%)] fkex flex flex-col gap-4">
+        <h1 class="text-3xl font-bold">{{ cloth_detail.name }}</h1>
+        <p class="text-2xl font-semibold">Rs. {{ cloth_detail.price }} PKR.</p>
+        <div id="text-div" class="sm:overflow-hidden sm:h-40 sm:border-b-[1px] border-gray-500">
+          <p class="text-gray-700">{{ cloth_detail.description|safe }}</p>
+        </div>
+        <button id="read-more" class="btn btn-primary rounded-none m-1 sm:inline-flex hidden">Read More <i class="fa-solid fa-arrow-down"></i></button>
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-primary rounded-none m-1">Order Now</div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+            <li>
+              <a href="https://wa.me/923185761580" target="_blank">Whatsapp</a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/profile.php?id=100081805952315" target="_blank">Facebook</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    const btn = document.querySelector('#read-more')
+    const text = document.querySelector('#text-div')
+    
+    btn.addEventListener('click', () => {
+      text.classList.toggle('sm:overflow-hidden')
+      text.classList.toggle('sm:border-b-[1px]')
+      text.classList.toggle('sm:h-40')
+    })
+  </script>
+{% endblock %}

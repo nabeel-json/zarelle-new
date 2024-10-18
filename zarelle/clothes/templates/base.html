@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html data-theme="autumn" lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+
+      {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="{% static 'script.js' %}" defer></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d'
+            }
+          },
+          plugins: [require('daisyui')],
+      
+          // daisyUI config (optional - here are the default values)
+          daisyui: {
+            themes: ['light', 'dark', 'autumn']
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="py-4 text-center border-b-2 border-b-gray-300 bg-primary text-primary-content">Welcome to Zarelle</div>
+    <nav class="px-4 lg:px-8 z-40">
+      <div class="navbar bg-base-100">
+        <div class="navbar-start">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+              </svg>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a>Contact</a>
+                <ul class="p-2">
+                  <li>
+                    <a href="https://wa.me/923185761580">Whatsapp</a>
+                  </li>
+                  <li>
+                    <a href="https://www.facebook.com/profile.php?id=100081805952315" target="_blank">Facebook</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="/#products">Collections</a>
+              </li>
+            </ul>
+          </div>
+          <a href="/"><img draggable="false" class="sm:w-40 w-32" src="https://i.postimg.cc/FKKCfTcM/LGO-SLAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY.jpg" alt="zarelle logo" /></a>
+        </div>
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/#products">Collections</a>
+            </li>
+            <li>
+              <div class="dropdown">
+                <div tabindex="0" class="">Contact</div>
+                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                  <li>
+                    <a href="https://wa.me/923185761580" target="_blank">Whatsapp</a>
+                  </li>
+                  <li>
+                    <a href="https://www.facebook.com/profile.php?id=100081805952315" target="_blank">Facebook</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="navbar-end">
+          <a href="/#products" class="btn btn-outline rounded-none text-sm">View Products</a>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% comment %}footer{% endcomment %}
+    <footer class="footer footer-center bg-primary text-primary-content rounded p-10">
+      <nav class="flex justify-center items-center flex-wrap gap-4">
+        <a href="/policies/#terms-of-service" target="_blank" class="link link-hover">Terms of Service</a>
+        <a href="/policies/#privacy-policy" target="_blank" class="link link-hover">Privacy Policy</a>
+        <a href="/policies/#refund-policy" target="_blank" class="link link-hover">Refund Policy</a>
+        <a href="/policies/#shipping-policy" target="_blank" class="link link-hover">Shipping Policy</a>
+      </nav>
+      <nav>
+        <div class="grid grid-flow-col gap-4">
+          <a target="_blank" href="https://wa.me/923185761580" class="text-xl"><i class="fa-brands fa-whatsapp"></i></a>
+          <a target="_blank" href="https://www.facebook.com/profile.php?id=100081805952315" class="text-xl"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </nav>
+      <aside>
+        <p>Copyright © 2024 &middot; All rights reserved &middot; Zarelle Pakistan</p>
+      </aside>
+    </footer>
+    {% block script %}
+      <script></script>
+    {% endblock %}
+  </body>
+</html>

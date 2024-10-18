@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  🌺 Zarelle.pk | Shop Fashionable Clothes
+{% endblock %}
+{% block content %}
+  <div class="relative flex items-center justify-center">
+    <img class="filter brightness-75 -z-10 md:flex hidden" draggable="false" src="https://i.postimg.cc/gJ5p7FzH/banner.jpg" alt="zarelle banner image" />
+    <img class="filter brightness-75 -z-10 md:hidden flex" draggable="false" src="https://i.postimg.cc/WbB0LRB4/banner-big.webp" alt="zarelle banner image" />
+    <div class="absolute inset-0 flex flex-col justify-center z-20">
+      <div class="text-center mt-auto mb-12">
+        <h1 class="lg:text-5xl lg:block md:text-4xl md:block hidden text-white font-serif">Browse our collection</h1>
+        <a href="#products" class="mt-6 btn btn-primary text-primary-content rounded-none text-sm md:inline-flex hidden">View Products</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="products">
+    <div class="py-20 md:px-20 px-10">
+      <h2 class="text-2xl mb-10">Our Products</h2>
+      <label class="input input-bordered input-primary rounded-none flex items-center gap-2 w-[min(550px,95%)] mb-10">
+        <input id="search-input" type="text" class="grow" placeholder="Try 'linen' or 'red'" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+          <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+        </svg>
+      </label>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+        {% for clo in cloth %}
+          <a href="{% url 'cloth_detail' clo.id %}">
+            <div class="flex flex-col rounded-lg">
+              <img draggable="false" src="{{ clo.image1 }}" alt="Product 1" class="float-left mr-4 mb-4" />
+              <div class="text-left flex flex-col gap-3">
+                <span class="">
+                  <h3 id="product-forjs" class="text-xl font-medium text-gray-700">{{ clo.name }}</h3>
+                  <p class="text-lg text-gray-500">Rs. {{ clo.price }} PKR.</p>
+                </span>
+                <button class="btn btn-outline rounded-none w-1/2">Order Now</button>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block script %}
+  <script>
+    const input = document.querySelector('#search-input')
+    let product = document.querySelectorAll('#product-forjs')
+    
+    input.addEventListener('input', (e) => {
+      let value = e.target.value.trim().toLowerCase()
+    
+      if (value) {
+        product.forEach((item, index) => {
+          const parentElement = item.closest('a')
+          if (!item.textContent.toLowerCase().includes(value)) {
+            parentElement.style.display = 'none'
+          } else {
+            parentElement.style.display = 'block'
+            parentElement.style.order = index
+          }
+        })
+      } else {
+        product.forEach((item, index) => {
+          const parentElement = item.closest('a')
+          parentElement.style.display = 'block'
+          parentElement.style.order = index
+        })
+      }
+    })
+  </script>
+{% endblock %}
